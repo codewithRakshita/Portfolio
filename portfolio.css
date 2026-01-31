@@ -479,6 +479,9 @@ section {
     overflow: hidden;
     box-shadow: var(--shadow-prominent);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto; /* Add horizontal scroll for very small screens */
 }
 
 .code-header {
@@ -487,6 +490,7 @@ section {
     display: flex;
     align-items: center;
     gap: 10px;
+    min-width: min-content; /* Prevent header from shrinking */
 }
 
 .code-dot {
@@ -504,10 +508,15 @@ section {
     font-size: 0.9rem;
     font-family: 'Monaco', 'Courier New', monospace;
     flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .code-content {
     padding: 24px;
+    width: 100%;
+    overflow-x: auto;
 }
 
 .code-content pre {
@@ -516,10 +525,13 @@ section {
     font-size: 0.95rem;
     line-height: 1.6;
     overflow-x: auto;
+    min-width: min-content; /* Allow content to shrink */
 }
 
 .code-content code {
     color: #e2e8f0;
+    display: block;
+    overflow-x: auto;
 }
 
 .code-content .string { color: #7ee787; }
@@ -1228,9 +1240,25 @@ footer::before {
         gap: 40px;
     }
 
-    /* Removed the order: -1 property to keep hero-visual after content */
+    /* IMPORTANT: Removed order property for hero-visual */
     .hero-visual {
         margin-top: 40px;
+        width: 100%;
+    }
+
+    /* Fix code snippet for mobile */
+    .code-snippet {
+        width: 100%;
+        margin: 0 auto;
+        max-width: 100%;
+    }
+
+    .code-content {
+        padding: 16px;
+    }
+
+    .code-content pre {
+        font-size: 0.85rem;
     }
 
     .hero-actions {
@@ -1297,7 +1325,7 @@ footer::before {
 
 @media (max-width: 480px) {
     .container {
-        padding: 0 20px;
+        padding: 0 16px; /* Reduced padding for very small screens */
     }
     
     section {
@@ -1331,16 +1359,20 @@ footer::before {
     }
     
     .btn {
-        padding: 12px 24px;
+        padding: 12px 20px; /* Reduced padding */
         font-size: 0.95rem;
     }
     
     .code-content {
-        padding: 16px;
+        padding: 12px; /* Reduced padding */
     }
     
     .code-content pre {
-        font-size: 0.85rem;
+        font-size: 0.8rem; /* Smaller font for code */
+    }
+    
+    .code-header {
+        padding: 12px 16px; /* Reduced padding */
     }
     
     .contact-form {
@@ -1372,18 +1404,35 @@ footer::before {
     }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 360px) {
+    /* Extra small phone optimizations */
     .container {
-        padding: 0 16px;
+        padding: 0 12px;
     }
     
     .hero-name {
         font-size: 1.8rem;
     }
     
-    .btn {
-        padding: 10px 20px;
+    .hero-subtitle {
         font-size: 0.9rem;
+    }
+    
+    .typewriter-text {
+        font-size: 0.9rem;
+    }
+    
+    .hero-description {
+        font-size: 0.95rem;
+    }
+    
+    .btn {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .code-content pre {
+        font-size: 0.75rem;
     }
     
     .hero-stats {
